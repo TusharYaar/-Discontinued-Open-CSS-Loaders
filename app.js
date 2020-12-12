@@ -3,7 +3,6 @@ const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  Db = require("./models"),
   myRoutes = require("./routes"),
   PORT = process.env.PORT || 3000;
 require("dotenv").config();
@@ -12,9 +11,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 mongoose.Promise = Promise;
-app.use(myRoutes);
+app.use("/api", myRoutes);
 
 app.get("/", (req, res) => {
   res.send("index.html");
@@ -29,9 +28,6 @@ app.get("/getquote", (req, res) => {
       res.send(red.slip.advice);
     }
   });
-});
-app.get("/serveranypopup", (req, res) => {
-  res.send("NO");
 });
 
 app.post("*", (req, res) => {

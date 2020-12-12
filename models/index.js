@@ -20,11 +20,11 @@ const siteSchema = new mongoose.Schema({
     type: Number,
     required: " loaderid cannot be empty",
   },
+  contributor: { type: String, default: "Anonymous" },
   likes: {
     type: Number,
     default: 0,
   },
 });
 var Db = mongoose.model("Db", siteSchema);
-
 module.exports = Db;

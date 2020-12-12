@@ -166,7 +166,7 @@ p#quote {
 }
 
 /* Styling For Add Code Container */
-#details-to-add-code {
+#detailsToAddCode {
   display: flex;
   flex-direction: row;
   flex-basis: 400px;
@@ -176,13 +176,13 @@ p#quote {
   margin-bottom: 10px;
   height: auto;
 }
-#details-to-add-code > div:first-child {
+#detailsToAddCode > div:first-child {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 150px;
 }
-#details-to-add-code > div > input {
+#detailsToAddCode > div > input {
   height: 50px;
   padding: 5px;
   border-radius: 5px;
@@ -238,7 +238,7 @@ section.code-snippet-container > img:active {
 }
 
 section.code-snippet-container h6,
-#details-to-add-code > div > label,
+#detailsToAddCode > div > label,
 .instruction > h6 {
   font-size: 24px;
   font-weight: normal;
@@ -295,6 +295,24 @@ div.loaderbox-parent > h4 {
 div.loaderbox-parent > h5 {
   position: absolute;
   bottom: 10px;
+}
+div.loaderbox-parent > div.likes {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  width: auto;
+  height: 30px;
+}
+div.loaderbox-parent > div.likes > img {
+  height: 20px;
+  width: 20px;
+  float: left;
+  margin-right: 5px;
+}
+div.loaderbox-parent > div.likes > h6 {
+  font-size: 16px;
+  font-weight: normal;
+  float: right;
 }
 div.loaderbox {
   height: 300px;

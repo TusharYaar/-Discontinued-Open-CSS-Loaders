@@ -9,12 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
 <!-- The Style Tag is included so that the loaders style is added here by jQuery -->
-        <style></style>        
+        <style>
+        </style>       
+        <style id="loaderStyle"></style> 
         <!-- All the Links of Style are reffered here -->
-        <link rel="stylesheet" href="./prism/themes/prism.css" id="prism-theme">
-        <link rel="stylesheet" href="./prism/prism-live.css">
         <link rel="stylesheet" href="./mainstyle.css">
-        <meta name="google-site-verification" content="iCLzS5Sm_eFmirnvXFEJH5VRPt3vzy11Ls978P3yN_w" />
     </head>
 
     <body>
@@ -26,75 +25,65 @@
 <a href="https://www.linkedin.com/in/tushar-s-agrawal-215ba81a0/" target="_blank"><div class="social-media linkedin-div"><img src="https://img.icons8.com/fluent/48/000000/linkedin.png" alt="in"><span class="social-media-text" >LinkedIn</span></div></a>
 <a href="https://twitter.com/Agrawal16Tushar" target="_blank"><div class="social-media "><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/><span class="social-media-text" alt="T">Twitter</span></div></a>
 <a href="mailto: tusharagrawal16@rediffmail.com" target="_blank"><div class="social-media"><img src="https://img.icons8.com/fluent/48/000000/email-sign.png"/><span class="social-media-text" alt="@">E-mail</span></div></a>
-<a href="https://dev.to/tusharyaar" target="_blank"><div class="social-media"><img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Tushar Agrawal's DEV Profile" height="48" width="48"><span class="social-media-text" alt="Dev">DEV.to</span></div></a>
+<a href="https://dev.to/tusharyaar" target="_blank"><div class="social-media"><img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Tushar Agrawal's DEV Profile" style="height:48px; width:48px; background-color:white;" ><span class="social-media-text" alt="Dev">DEV.to</span></div></a>
 <div id="inpage-links"> <a href="#about">About</a> <a href="#rules">Rules</a> </div>
 </header>     <!--Header Ends Here  -->
-<p id="quote">Loading an advice for YOU</p>
+<p id="quote">Loading an advice for you</p>
 <!-- Block For Popup -->
 <div class="popup-container">
-    <div id="popupBox"><p>THis os the trial version of the app. Any Suggestions are appreciated </p>
+    <div id="popupBox"><p></p>
         <button class="btn" id="btn-popupBox">I Understand</button>
     </div>
 </div>
 <!-- Button To Display add Code Block -->
-
-<button class="btn" id="btn-add-code-snippet"> Add A Code</button>
-<select id="theme-select"><option value="./prism/themes/prism.css">Default</option>
-    <option value="./prism/themes/prism-coy.css">Coy</option>
-    <option value="./prism/themes/prism-dark.css">Dark</option>
-    <option value="./prism/themes/prism-funky.css">Funky</option>
-    <option value="./prism/themes/prism-night.css">Night</option>
-    <option value="./prism/themes/prism-okaida.css">Okaida</option>
-    <option value="./prism/themes/prism-solar.css">Solar</option>
-    <option value="./prism/themes/prism-twilight.css">Twilight</option>
+<button class="btn" id="btnAddCode">Add A Code</button>
+<select id="theme-select">
 </select>
 <div id="page-theme-toggle"><div></div></div>
-    <section id="add-code-snippet" class="code-snippet-container">
+    <section id="addCode" class="code-snippet-container">
     <img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png"  alt="X">
-        <div id="details-to-add-code">
-            <div><label for="add-loader-name">Name of the loader</label>
-         <input id="add-loader-name" type="text">
+        <div id="detailsToAddCode">
+            <div><label for="addLoaderName">Name of the loader</label>
+         <input id="addLoaderName" type="text">
          <br>
-         <label for="code-snippet-contributor">Contributor</label>
-        <input id="code-snippet-contributor" type="text">
+         <label for="addContributorName">Contributor</label>
+        <input id="addContributorName" type="text">
         </div>
-        <div id="output"><h6>Output</h6><div id="add-code-snippet-output" class="loaderbox"></div></div>
+        <div id="output"><h6>Output</h6><div id="addCodeOutput" class="loaderbox"></div></div>
     </div>
-    
-
-     <h6>HTML   (Please Add the id <span id="id-to-add"></span> to the Parent div)</h6>
-     <textarea id="code-snippet-html-input" type="text" class="prism-live language-html"></textarea>
+     <h6>HTML   (Please Add the id "<span id="id-to-add"></span>" to the Parent div)</h6>
+     <div id="addCodeHTML"></div>
 
     <h6>CSS</h6>
-    <textarea id="code-snippet-css-input" class="prism-live language-css" type="text"></textarea>
-    <button class="btn" id="btn-add-code">Add this Code</button>  
+    <div id="addCodeCSS"></div>
+    <button class="btn" id="btnAddThisCode">Add this Code</button>  
 </section>
 <!--Show Code Block (non-editable) -->
-<section id="code-snippet" class="code-snippet-container">
-    <h4>Name Of the Loader</h4><img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png">
+<section id="showCode" class="code-snippet-container">
+    <h4>Name Of the Loader</h4>
+    <img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png">
     <h6>HTML</h6>
-      <div id="code-snippet-html"><pre class="language-html"><code class="language-html"></code></pre></div>
+      <div id="showCodeHTML"></div>
     <h6>CSS</h6>
-    <div id="code-snippet-css"><pre class="language-css"><code class="language-css"></code></pre></div>
-    <button class="btn" id="btn-edit-code-snippet"> Edit This Code</button>
+    <div id="showCodeCSS"></div>
+    <button class="btn" id="btnEditCode"> Edit This Code</button>
 </section>
 
 
 <!-- This is the Edit Code Block -->
-<section id="edit-code-snippet" class="code-snippet-container">
+<section id="editCode" class="code-snippet-container">
     <h4>Name Of the Loader</h4> <img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png" alt="X">
-           <textarea id="edit-code-snippet-html-input" type="text" class="prism-live language-html"></textarea>
+           <div id="editCodeHTML"></div>
 
 Output
-<div id="edit-code-snippet-output" class="loaderbox"></div>
-    CSS
-    <textarea id="edit-code-snippet-css-input" class="prism-live language-css" type="text"></textarea>
-</section>
+<div id="editCodeOutput" class="loaderbox"></div>
+    CSS 
+    <div id="editCodeCSS"></div>
+</section> 
 
 
-<!-- The Container which loads all the Loaders -->
-<section class="container">
-</section>
+
+<section class="container"><!-- The Container which loads all the Loaders --></section>
 <section id="rules" class="instruction"><img src="https://img.icons8.com/color/48/000000/down-squared.png"/><h6>Rules</h6>
     <ol>
         <li>Please donot copy code from some other site and paste it here.</li>
@@ -117,17 +106,21 @@ Made with <img id = "love-img" src="https://img.icons8.com/flat_round/64/000000/
 </p>
 </section>
 
-
 <a href="#brand-name" id="go-to-top"><h6>Go To Top</h6></a>
 <footer>
     <a href="https://icons8.com/">Icons by Icons8</a>
 </footer>
+
+
 <!-- Alll The Scripts Are included here -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>  $.get("https://wb26iz.deta.dev/serveranypopup").done(function (data) {
-    if (data != "NO") {
+<script src="./ace/ace.js"></script>
+<script src="./data.js"></script>
+<script src="./script.js"></script>
+<script>  $.get(`${url}api/serveranypopup`).done(function (data) {
+    if (data.message != "NO") {
     $("html").scrollTop(0);
-      UpdatePopup(data);
+      UpdatePopup(data.message);
     }
   });
 
@@ -138,8 +131,5 @@ Made with <img id = "love-img" src="https://img.icons8.com/flat_round/64/000000/
     $("body").css("overflow", "hidden");
   }
 </script>
-        <script src="./prism/prism.js"></script>
-        <script src="./prism/src/prism-live.js"></script>
-        <script src="./script.js"></script>
     </body>
 </html>

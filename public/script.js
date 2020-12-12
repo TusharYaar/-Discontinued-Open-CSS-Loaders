@@ -3,10 +3,8 @@ var oldStyle = "";
 var idtoadd = 0;
 var editthis = 0;
 var existingKeyframes = new Array();
-const darkElement = ["header", "#page-theme-toggle > div", "body", ".social-media"];
-window.addEventListener("DOMContentLoaded", () => {
-  var template = "<div class='loaderbox-parent'></div>";
 
+window.addEventListener("DOMContentLoaded", () => {
   function LoadLoaderData() {
     $(".container").html("");
     oldStyle = "";
@@ -14,42 +12,64 @@ window.addEventListener("DOMContentLoaded", () => {
       var loaderbox = $(loader.html);
       loaderbox.addClass("loaderbox");
       loaderbox.data("index", index);
-      var loaderboxParent = $(template);
+      var loaderboxParent = $("<div class='loaderbox-parent'></div>");
       loaderboxParent.append(loaderbox);
       loaderboxParent.data("index", index);
-      loaderboxParent.append("<h4>" + loader.name + "</h4>");
-      loaderboxParent.append("<h5>" + loader.contributer + "</h5>");
+      loaderboxParent.data("id", loader._id);
+      loaderboxParent.append(`<h4>${loader.name}</h4> <h5>${loader.contributor}</h5> <div class="likes"><img src=${dislike}><h6>${loader.likes}</h6></div>`);
       $(".container").append(loaderboxParent);
-      $("style").append(loader.css);
+      $("style#loaderStyle").append(loader.css);
       idtoadd = idtoadd <= loader.loaderid ? loader.loaderid + 1 : idtoadd;
-      oldStyle += " " + loader.css;
+      oldStyle = ` ${oldStyle} ${loader.css}`;
     });
     $("#id-to-add").text("loader" + idtoadd);
     makeKeyframes();
   }
   $(".container").on("click", "div.loaderbox-parent", function () {
     editthis = $(this).data("index");
-    console.log(editthis);
     $(".code-snippet-container").removeClass("active");
-    $("#code-snippet").addClass("active");
-    $("#code-snippet > h3").text(loaderData[editthis].name);
-    $("#code-snippet .language-html").html(alterHTML(loaderData[editthis].html));
-    $("#code-snippet .language-css").html(loaderData[editthis].css);
-    Prism.highlightElement($("#code-snippet .language-css")[0]);
-    Prism.highlightElement($("#code-snippet .language-html")[0]);
+    $("#showCode").addClass("active");
+    $("#showCode > h4").text(loaderData[editthis].name);
+    showCodeHTML.setValue(loaderData[editthis].html);
+    showCodeCSS.setValue(loaderData[editthis].css);
+  });
+  $(".container").on("click", "div.likes", function (e) {
+    e.stopPropagation();
+    var id = $(this).parent().data().id;
+    var data = dislike === $(this).children("img").attr("src");
+    $.ajax({
+      method: "PUT",
+      url: `${url}api/like/${id}/${data}`,
+      data: `like=${data}`,
+    }).done((data) => {
+      var element = $(this).children("h6");
+      element.text(parseInt(element.text()) + data.val);
+      var img = data.val === 1 ? like[Math.floor(Math.random() * like.length)] : dislike;
+      $(this).children("img").attr("src", img);
+    });
   });
 
   // Click Events
   $(".code-snippet-container > img").click(() => {
     $(".code-snippet-container").removeClass("active");
   });
-  $("#btn-add-code-snippet").click(() => {
-    var hasClass = $("#add-code-snippet").hasClass("active");
+  $("#btnAddCode").click(() => {
+    var hasClass = $("#addCode").hasClass("active");
     $(".code-snippet-container").removeClass("active");
-    if (!hasClass) $("#add-code-snippet").addClass("active");
+    if (!hasClass) $("#addCode").addClass("active");
   });
+  function fillThemeSelect() {
+    themes.forEach((theme) => {
+      $("#theme-select").append(`<option value="${theme}">${theme}</option>`);
+    });
+  }
   $("#theme-select").change(function () {
-    $("#prism-theme").attr("href", $(this).val());
+    addCodeHTML.setTheme(`ace/theme/${$(this).val()}`);
+    addCodeCSS.setTheme(`ace/theme/${$(this).val()}`);
+    showCodeHTML.setTheme(`ace/theme/${$(this).val()}`);
+    showCodeCSS.setTheme(`ace/theme/${$(this).val()}`);
+    editCodeHTML.setTheme(`ace/theme/${$(this).val()}`);
+    editCodeCSS.setTheme(`ace/theme/${$(this).val()}`);
   });
 
   $("#page-theme-toggle").click(function () {
@@ -70,43 +90,40 @@ window.addEventListener("DOMContentLoaded", () => {
     $(id).toggleClass("active");
   });
 
-  $("#btn-edit-code-snippet").click(() => {
+  $("#btnEditCode").click(() => {
+    var html = changeid(loaderData[editthis].html);
+    var css = changeid(loaderData[editthis].css);
     $(".code-snippet-container").removeClass("active");
-    $("#edit-code-snippet").addClass("active");
-    $("#edit-code-snippet-html-input").val(changeid(loaderData[editthis].html));
-    $("#edit-code-snippet code.language-html").html(changeid(alterHTML(loaderData[editthis].html)));
-    $("#edit-code-snippet-css-input").val(changeid(loaderData[editthis].css));
-    $("#edit-code-snippet code.language-css").html(changeid(loaderData[editthis].css));
-    $("#edit-code-snippet > h4").text(loaderData[editthis].name);
-    $("#edit-code-snippet-output").html("<div>" + changeid(loaderData[editthis].html) + "</div>");
-    $("style").text(oldStyle + $("#edit-code-snippet-css-input").val());
-    Prism.highlightElement($("#edit-code-snippet code.language-html")[0]);
-    Prism.highlightElement($("#edit-code-snippet code.language-css")[0]);
+    $("#editCode").addClass("active");
+    editCodeHTML.setValue(html);
+    editCodeCSS.setValue(css);
+    $("#editCode > h4").text(loaderData[editthis].name);
+    $("#editCodeOutput").html(`<div>${html}</div>`);
+    $("style#loaderStyle").text(oldStyle + css);
   });
 
   // Add Code Button
   // Send a Post request to the server
-  $("#btn-add-code").click(function () {
+  $("#btnAddThisCode").click(function () {
     var obj = {
-      name: $("#add-loader-name").val(),
-      html: $("#code-snippet-html-input").val(),
-      css: $("#code-snippet-css-input").val(),
-      contributer: $("#code-snippet-contributor").val(),
+      name: $("#addLoaderName").val(),
+      html: addCodeHTML.getValue(),
+      css: addCodeCSS.getValue(),
+      contributor: $("#addContributorName").val(),
       loaderid: idtoadd,
     };
-    if (obj.name.length < 3 || obj.html.length < 3 || obj.css.length < 3) {
+    if (obj.name.length < 3 || obj.html.length < 6 || obj.css.length < 26) {
       alert("Less Number of Characters Provided");
     } else if (ifIDPresent(obj) && checkKeyframes(obj.css)) {
-      $("#add-loader-name").val("");
-      $("#code-snippet-html-input").val("");
-      $("#code-snippet-css-input").val("");
-      $("#code-snippet-contributor").val("");
-
-      $(".code-snippet-container").removeClass("active");
-      $.post("https://wb26iz.deta.dev/api/addthiscode", obj)
+      $.post(`${url}api/addthiscode`, obj)
         .done((data) => {
           loaderData.push(data);
           LoadLoaderData();
+          $("#addLoaderName").val("");
+          addCodeHTML.session.setValue("");
+          addCodeCSS.session.setValue("");
+          $("#addContributorName").val("");
+          $(".code-snippet-container").removeClass("active");
         })
         .catch((err) => {
           alert("Error!!! Cannot Add the Loader");
@@ -114,34 +131,39 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  $("#code-snippet-html-input").keyup(() => {
-    $("#add-code-snippet-output").html($("#code-snippet-html-input").val());
+  addCodeHTML.session.on("change", function (delta) {
+    delay(function () {
+      $("#addCodeOutput").html(addCodeHTML.getValue());
+    });
   });
-  $("#code-snippet-css-input").keyup(() => {
-    $("style").text(oldStyle + $("#code-snippet-css-input").val());
+  addCodeCSS.session.on("change", function (delta) {
+    delay(function () {
+      $("style#loaderStyle").text(oldStyle + addCodeCSS.getValue());
+    });
   });
-  $("#edit-code-snippet-html-input").keyup(() => {
-    $("#edit-code-snippet-output > div").html($("#edit-code-snippet-html-input").val());
+
+  editCodeHTML.session.on("change", function (delta) {
+    delay(function () {
+      $("#editCodeOutput > div").html(editCodeHTML.getValue());
+    });
   });
-  $("#edit-code-snippet-css-input").keyup(() => {
-    $("style").text(oldStyle + $("#edit-code-snippet-css-input").val());
+  editCodeCSS.session.on("change", function (delta) {
+    $("style#loaderStyle").text(oldStyle + editCodeCSS.getValue());
   });
 
   // Quote Generation And Clicking Response
   function generateQuote() {
-    $.get("https://wb26iz.deta.dev/api/getquote").done(function (data) {
+    $.get(`${url}getquote`).done(function (data) {
       $("#quote").text(data);
     });
   }
+  fillThemeSelect();
   generateQuote();
-  // run as soon as page loads
-  // Calls functions to show the loaders
-  // call the async request to generate quote
   $("#add-code-snippet").removeClass("active");
   $("#code-snippet").removeClass("active");
 
-  $.getJSON("https://wb26iz.deta.dev/api/allloader").done(function (data) {
-    loaderData = data.value;
+  $.getJSON(`${url}api/getloaders`).done(function (data) {
+    loaderData = data;
     LoadLoaderData();
   });
 
@@ -197,4 +219,11 @@ window.addEventListener("DOMContentLoaded", () => {
     if (exist) return true;
     else return false;
   }
+  var delay = (function () {
+    var timer = 0;
+    return function (callback) {
+      clearTimeout(timer);
+      timer = setTimeout(callback, 1000);
+    };
+  })();
 });
