@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
     var data = dislike === $(this).children("img").attr("src");
     $.ajax({
       method: "PUT",
-      url: `${url}api/like/${id}/${data}`,
+      url: `${url}api/like/${id}`,
       data: `like=${data}`,
     }).done((data) => {
       var element = $(this).children("h6");
