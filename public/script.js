@@ -21,8 +21,8 @@ window.addEventListener("DOMContentLoaded", () => {
       }
       loaderboxParent.append(loaderbox);
       loaderboxParent.data("index", index);
-      loaderboxParent.data("id", loader._id);
-      loaderboxParent.append(`<h4>${loader.name}</h4> <h5>${loader.contributor}</h5> <div class="likes"><img src=${dislike}><h6>${loader.likes}</h6></div>`);
+      loaderboxParent.data("id", loader.loaderid);
+      loaderboxParent.append(`<h4>${loader.lname}</h4> <h5>${loader.contributor}</h5> <div class="likes"><img src=${dislike}><h6>${loader.likes}</h6></div>`);
 
       $(".container").append(loaderboxParent);
       $("style#loaderStyle").append(loader.css);
@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Send a Post request to the server
   $("#btnAddThisCode").click(function () {
     var obj = {
-      name: $("#addLoaderName").val(),
+      lname: $("#addLoaderName").val(),
       html: addCodeHTML.getValue(),
       css: addCodeCSS.getValue(),
       contributor: $("#addContributorName").val(),

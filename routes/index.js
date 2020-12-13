@@ -4,13 +4,12 @@ const connection = require("../models");
 router = express.Router();
 
 router.get("/getloaders", (req, res) => {
-  Db.find()
-    .then(function (data) {
-      res.json(data);
-    })
-    .catch(function (err) {
-      res.send(err);
-    });
+  connection.query("select * from loaders", function (err, result) {
+    if (err) {
+      res.send("ERROR");
+    }
+    res.send(result);
+  });
 });
 router.post("/setpopup", (req, res) => {
   connection.query("select * from others", function (err, result) {
@@ -32,17 +31,19 @@ router.get("/serveranypopup", (req, res) => {
 });
 
 router.post("/addthiscode", (req, res) => {
-  Db.create(req.body)
-    .then(function (data) {
-      res.json(data);
-    })
-    .catch(function (err) {
-      res.send(err);
-    });
+  var post = req.body;
+  console.log(post);
+  connection.query("INSERT INTO loaders SET ?", post, (err, result) => {
+    if (err) res.send(err);
+    else res.send(result);
+  });
 });
 router.put("/like/:loader", (req, res) => {
   var val = req.body.like == "true" ? 1 : -1;
-  Db.findOneAndUpdate({ _id: req.params.loader }, { $inc: { likes: val } }).then(res.json({ val: val }));
+  connection.query("UPDATE loaders SET likes = likes + ? WHERE loaderid = ?", [val, req.params.loader], (err, result) => {
+    if (err) res.send(err);
+    else res.json({ val: val });
+  });
 });
 router.post("/imgoingtodeletethispost/:loader", (req, res) => {
   messages.findById(process.env.PASSWORD).then((data) => {

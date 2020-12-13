@@ -127,9 +127,9 @@ ace.config.set('themePath', 'https://pagecdn.io/lib/ace/1.4.12/');
 <script src="./data.js"></script>
 <script src="./script.js"></script>
 <script>  $.get(`${url}api/serveranypopup`).done(function (data) {
-    if (data.message != "NO") {
+    if (data!= "NO") {
     $("html").scrollTop(0);
-      UpdatePopup(data.message);
+      UpdatePopup(data);
     }
   });
 
