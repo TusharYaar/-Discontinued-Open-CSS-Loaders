@@ -17,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
       if (dark) {
         loaderbox.addClass("dark");
         loaderboxParent.addClass("dark");
+        console.log("dark class added");
       }
       loaderboxParent.append(loaderbox);
       loaderboxParent.data("index", index);
@@ -82,6 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
     var img = $(this).children("img");
     dark = img.attr("src") == sun ? false : true;
     img.attr("src", dark ? sun : moon);
+
     darkElement.forEach((element) => {
       if (dark) {
         $(element).removeClass("dark");
@@ -89,6 +91,7 @@ window.addEventListener("DOMContentLoaded", () => {
         $(element).addClass("dark");
       }
     });
+    dark = !dark;
   });
   $("#btn-popupBox").click(() => {
     $(".popup-container").css("display", "none");
