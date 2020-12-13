@@ -14,13 +14,12 @@ router.get("/getloaders", (req, res) => {
 });
 router.post("/setpopup", (req, res) => {
   messages.findById(process.env.PASSWORD).then((data) => {
-    if (data.password == req.body.password) {
-      messages
-        .findOneAndUpdate({ _id: process.env.MESSAGE }, { message: req.body.message })
-        .then((data) => {
-          res.send(`message set to <h4>${data.message}</h4>`);
-        })
-        .catch(res.send("cannot set the popup"));
+    if (data.message == req.body.password) {
+      messages.findOneAndUpdate({ _id: process.env.MESSAGE }, { message: req.body.message }).then((data) => {
+        res.send("Message Set");
+      });
+    } else {
+      res.send("Woring Password");
     }
   });
 });
