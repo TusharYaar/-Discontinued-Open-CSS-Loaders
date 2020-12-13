@@ -1,30 +1,13 @@
-const mongoose = require("mongoose");
-const siteSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: " Name cannot be empty",
-  },
-  html: {
-    type: String,
-    required: " html cannot be empty",
-  },
-  css: {
-    type: String,
-    required: " CSS cannot be empty",
-  },
-  date: {
-    type: Date,
-    default: Date.now(),
-  },
-  loaderid: {
-    type: Number,
-    required: " loaderid cannot be empty",
-  },
-  contributor: { type: String, default: "Anonymous" },
-  likes: {
-    type: Number,
-    default: 0,
-  },
-});
-var Db = mongoose.model("Db", siteSchema);
-module.exports = Db;
+var mysql = require("mysql");
+var db_config = {
+  host: "opencssdatabase-do-user-8430368-0.b.db.ondigitalocean.com", // Host name   Eg. localhost
+  user: "doadmin", // Username in the database    Eg. root
+  password: process.env.DATABASE_PASSWORD, // Password in the database Eg. password
+  database: "defaultdb", // Database You want to connect to   Eg. Flight Database
+  port: 25060, // Port
+  ssl: true, //
+};
+var connection = mysql.createConnection(db_config);
+connection.connect();
+
+module.exports = connection;

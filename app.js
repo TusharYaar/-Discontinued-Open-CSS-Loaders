@@ -1,18 +1,14 @@
+require("dotenv").config();
 const express = require("express"),
   request = require("request"),
   app = express(),
-  bodyParser = require("body-parser"),
-  mongoose = require("mongoose"),
-  myRoutes = require("./routes"),
-  PORT = process.env.PORT || 3000;
-require("dotenv").config();
+  connection = require("./models");
+(bodyParser = require("body-parser")), (myRoutes = require("./routes")), (PORT = process.env.PORT || 3000);
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
-mongoose.Promise = Promise;
 app.use("/api", myRoutes);
 
 app.get("/", (req, res) => {
@@ -35,5 +31,5 @@ app.post("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("listening to port 3000");
+  console.log(`listening to port ${PORT}`);
 });

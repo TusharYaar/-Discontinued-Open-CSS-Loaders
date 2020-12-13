@@ -1,6 +1,6 @@
 const express = require("express");
-const Db = require("../models");
-const messages = require("../models/messages");
+const connection = require("../models");
+
 router = express.Router();
 
 router.get("/getloaders", (req, res) => {
@@ -55,5 +55,7 @@ router.post("/imgoingtodeletethispost/:loader", (req, res) => {
     }
   });
 });
-
+router.get("/setthis", (req, res) => {
+  res.send("hit the set route");
+});
 module.exports = router;
