@@ -13,20 +13,21 @@ router.get("/getloaders", (req, res) => {
     });
 });
 router.post("/setpopup", (req, res) => {
-  messages.findById(process.env.PASSWORD).then((data) => {
-    if (data.message == req.body.password) {
-      messages.findOneAndUpdate({ _id: process.env.MESSAGE }, { message: req.body.message }).then((data) => {
-        res.send("Message Set");
+  connection.query("select * from others", function (err, result) {
+    if (req.body.password === result[1].content) {
+      connection.query("UPDATE others SET content = ? WHERE mtype = 'MESSAGE'", req.body.message, function (err, result) {
+        res.send(result);
       });
     } else {
-      res.send("Woring Password");
+      res.send("Wrong Password");
     }
   });
 });
 
 router.get("/serveranypopup", (req, res) => {
-  messages.findById(process.env.MESSAGE).then((data) => {
-    res.send(data);
+  connection.query("select content from others where mtype='MESSAGE'", function (err, result) {
+    if (err) res.send("NO");
+    else res.send(result[0].content);
   });
 });
 
@@ -56,6 +57,8 @@ router.post("/imgoingtodeletethispost/:loader", (req, res) => {
   });
 });
 router.get("/setthis", (req, res) => {
-  res.send("hit the set route");
+  connection.query("INSERT INTO others values('MESSAGE','NO')", function (err, result, field) {
+    res.send(result);
+  });
 });
 module.exports = router;
