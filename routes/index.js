@@ -12,9 +12,21 @@ router.get("/getloaders", (req, res) => {
       res.send(err);
     });
 });
+router.post("/setpopup", (req, res) => {
+  messages.findById(process.env.PASSWORD).then((data) => {
+    if (data.password == req.body.password) {
+      messages
+        .findOneAndUpdate({ _id: process.env.MESSAGE }, { message: req.body.message })
+        .then((data) => {
+          res.send(`message set to <h4>${data.message}</h4>`);
+        })
+        .catch(res.send("cannot set the popup"));
+    }
+  });
+});
 
 router.get("/serveranypopup", (req, res) => {
-  messages.findById("5fd3e352df588f320141179e").then((data) => {
+  messages.findById(process.env.MESSAGE).then((data) => {
     res.send(data);
   });
 });
@@ -28,13 +40,21 @@ router.post("/addthiscode", (req, res) => {
       res.send(err);
     });
 });
-router.put("/like/:loader/:value", (req, res) => {
+router.put("/like/:loader", (req, res) => {
   var val = req.body.like == "true" ? 1 : -1;
   Db.findOneAndUpdate({ _id: req.params.loader }, { $inc: { likes: val } }).then(res.json({ val: val }));
 });
-router.delete("/imgoingtodeletethispost/:loader", (req, res) => {
-  Db.deleteOne({ _id: req.params.loader }).then(function (data) {
-    res.send(data);
+router.post("/imgoingtodeletethispost/:loader", (req, res) => {
+  messages.findById(process.env.PASSWORD).then((data) => {
+    var password = req.body.password;
+    if (data.password === password) {
+      Db.deleteOne({ _id: req.params.loader }).then(function (data) {
+        res.send(data);
+      });
+    } else {
+      res.send("wrong password");
+    }
   });
 });
+
 module.exports = router;

@@ -10,6 +10,6 @@ var editCodeHTML = ace.edit("editCodeHTML", { mode: "ace/mode/html", theme: "ace
 var editCodeCSS = ace.edit("editCodeCSS", { mode: "ace/mode/css", theme: "ace/theme/twilight", minLines: 10, maxLines: 42, fontSize: "16px", fontFamily: "monospace" });
 const dislike = "https://img.icons8.com/ios/50/000000/like--v1.png";
 const like = ["https://img.icons8.com/clouds/100/000000/like.png", "https://img.icons8.com/plasticine/100/000000/hearts.png", "https://img.icons8.com/cotton/64/000000/hearts--v2.png", "https://img.icons8.com/plasticine/100/000000/melting-hert.png", "https://img.icons8.com/dusk/64/000000/diamond-heart.png", "https://img.icons8.com/plasticine/100/000000/music-heart.png"];
-const themes = ["twilight", "tomorrow"];
+const themes = ["twilight", "tomorrow", "ambiance", "chaos", "chrome", "github", "tomorrow_night_bright", "xcode", "monokai"];
 const moon = "https://img.icons8.com/emoji/48/000000/crescent-moon-emoji.png";
 const sun = "https://img.icons8.com/emoji/48/000000/sun-emoji.png";

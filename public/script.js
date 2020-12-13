@@ -3,6 +3,7 @@ var oldStyle = "";
 var idtoadd = 0;
 var editthis = 0;
 var existingKeyframes = new Array();
+var dark = false;
 
 window.addEventListener("DOMContentLoaded", () => {
   function LoadLoaderData() {
@@ -13,10 +14,15 @@ window.addEventListener("DOMContentLoaded", () => {
       loaderbox.addClass("loaderbox");
       loaderbox.data("index", index);
       var loaderboxParent = $("<div class='loaderbox-parent'></div>");
+      if (dark) {
+        loaderbox.addClass("dark");
+        loaderboxParent.addClass("dark");
+      }
       loaderboxParent.append(loaderbox);
       loaderboxParent.data("index", index);
       loaderboxParent.data("id", loader._id);
       loaderboxParent.append(`<h4>${loader.name}</h4> <h5>${loader.contributor}</h5> <div class="likes"><img src=${dislike}><h6>${loader.likes}</h6></div>`);
+
       $(".container").append(loaderboxParent);
       $("style#loaderStyle").append(loader.css);
       idtoadd = idtoadd <= loader.loaderid ? loader.loaderid + 1 : idtoadd;
@@ -74,9 +80,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   $("#page-theme-toggle").click(function () {
     var img = $(this).children("img");
-    img.attr("src", img.attr("src") == sun ? moon : sun);
+    dark = img.attr("src") == sun ? false : true;
+    img.attr("src", dark ? sun : moon);
     darkElement.forEach((element) => {
-      $(element).toggleClass("dark");
+      if (dark) {
+        $(element).removeClass("dark");
+      } else {
+        $(element).addClass("dark");
+      }
     });
   });
   $("#btn-popupBox").click(() => {
@@ -117,6 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (obj.name.length < 3 || obj.html.length < 6 || obj.css.length < 26) {
       alert("Less Number of Characters Provided");
     } else if (ifIDPresent(obj) && checkKeyframes(obj.css)) {
+      $(this).attr("disabled", true);
       $.post(`${url}api/addthiscode`, obj)
         .done((data) => {
           loaderData.push(data);
@@ -126,9 +138,11 @@ window.addEventListener("DOMContentLoaded", () => {
           addCodeCSS.session.setValue("");
           $("#addContributorName").val("");
           $(".code-snippet-container").removeClass("active");
+          $(this).attr("disabled", false);
         })
         .catch((err) => {
           alert("Error!!! Cannot Add the Loader");
+          $(this).attr("disabled", false);
         });
     }
   });
