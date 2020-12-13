@@ -73,6 +73,8 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   $("#page-theme-toggle").click(function () {
+    var img = $(this).children("img");
+    img.attr("src", img.attr("src") == sun ? moon : sun);
     darkElement.forEach((element) => {
       $(element).toggleClass("dark");
     });

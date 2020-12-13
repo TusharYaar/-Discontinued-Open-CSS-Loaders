@@ -21,7 +21,7 @@
 <header>
 <h1 id="brand-name"> Open CSS Loader</h1>
 <hr>
-<a href="https://github.com/TusharYaar/Open-CSS-Loader" target="_blank"><div class="social-media"><img src="https://img.icons8.com/fluent/48/000000/github.png" alt="G"><span class="social-media-text" >Github</span></div></a>
+<a href="https://github.com/TusharYaar/Open-CSS-Loaders" target="_blank"><div class="social-media"><img src="https://img.icons8.com/fluent/48/000000/github.png" alt="G"><span class="social-media-text" >Github</span></div></a>
 <a href="https://www.linkedin.com/in/tushar-s-agrawal-215ba81a0/" target="_blank"><div class="social-media linkedin-div"><img src="https://img.icons8.com/fluent/48/000000/linkedin.png" alt="in"><span class="social-media-text" >LinkedIn</span></div></a>
 <a href="https://twitter.com/Agrawal16Tushar" target="_blank"><div class="social-media "><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/><span class="social-media-text" alt="T">Twitter</span></div></a>
 <a href="mailto: tusharagrawal16@rediffmail.com" target="_blank"><div class="social-media"><img src="https://img.icons8.com/fluent/48/000000/email-sign.png"/><span class="social-media-text" alt="@">E-mail</span></div></a>
@@ -39,7 +39,9 @@
 <button class="btn" id="btnAddCode">Add A Code</button>
 <select id="theme-select">
 </select>
-<div id="page-theme-toggle"><div></div></div>
+<div id="page-theme-toggle">
+    <img src="https://img.icons8.com/emoji/48/000000/sun-emoji.png"/>
+</div>
     <section id="addCode" class="code-snippet-container">
     <img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png"  alt="X">
         <div id="detailsToAddCode">
@@ -114,7 +116,14 @@ Made with <img id = "love-img" src="https://img.icons8.com/flat_round/64/000000/
 
 <!-- Alll The Scripts Are included here -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./ace/ace.js"></script>
+<!-- <script src="./ace/ace.js"></script>
+ -->
+ <script src="https://pagecdn.io/lib/ace/1.4.12/ace.min.js" crossorigin="anonymous" integrity="sha256-T5QdmsCQO5z8tBAXMrCZ4f3RX8wVdiA0Fu17FGnU1vU=" ></script>
+ <script>
+     ace.config.set('basePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+ace.config.set('modePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+ace.config.set('themePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+ </script>
 <script src="./data.js"></script>
 <script src="./script.js"></script>
 <script>  $.get(`${url}api/serveranypopup`).done(function (data) {
