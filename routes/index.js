@@ -38,6 +38,21 @@ router.post("/addthiscode", (req, res) => {
     else res.send(result);
   });
 });
+router.post("/updatecode", (req, res) => {
+  connection.query("Select * from others where mtype = 'PASSWORD'", (err, result) => {
+    if (req.body.password != result[0].content) {
+      res.send("NO");
+    } else {
+      connection.query("UPDATE loaders SET html = ?, css = ?, lname =?, contributor = ? where loaderid = ?", [req.body.html, req.body.css, req.body.lname, req.body.contributor, req.body.loaderid], function (err, result) {
+        if (err) {
+          console.log(err);
+          res.send("Error");
+        } else res.send("Done");
+      });
+    }
+  });
+});
+
 router.put("/like/:loader", (req, res) => {
   var val = req.body.like == "true" ? 1 : -1;
   connection.query("UPDATE loaders SET likes = likes + ? WHERE loaderid = ?", [val, req.params.loader], (err, result) => {

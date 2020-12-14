@@ -1,7 +1,8 @@
 var loaderData = new Array();
 var oldStyle = "";
 var idtoadd = 0;
-var editthis = 0;
+var editthis = 0,
+  editthisid = 0;
 var existingKeyframes = new Array();
 var dark = false;
 
@@ -40,6 +41,7 @@ $(".code-snippet-container").on("click", "img", function () {
 
 $(".container").on("click", "div.loaderbox-parent", function () {
   editthis = $(this).data("index");
+  editthisid = $(this).data("id");
   $("#addCode").addClass("active");
   $("#addLoaderName").val(loaderData[editthis].lname);
   $("#addContributorName").val(loaderData[editthis].contributor);
@@ -60,33 +62,40 @@ addCodeCSS.session.on("change", function (delta) {
   $("style#loaderStyle").text(oldStyle + addCodeCSS.getValue());
 });
 
-$.getJSON(`http://localhost:3000/api/getloaders`).done(function (data) {
+$.getJSON(`${url}api/getloaders`).done(function (data) {
   loaderData = data;
   LoadLoaderData();
 });
 
-$("#btnAddThisCode").click(function () {
+$("#btnEditThisCode").click(function () {
   var obj = {
     lname: $("#addLoaderName").val(),
     html: addCodeHTML.getValue(),
     css: addCodeCSS.getValue(),
     contributor: $("#addContributorName").val(),
-    loaderid: editthi,
+    loaderid: editthisid,
+    password: $("#password").val(),
   };
-  if (obj.name.length < 3 || obj.html.length < 6 || obj.css.length < 26) {
+  if (obj.lname.length < 3 || obj.html.length < 6 || obj.css.length < 26 || obj.password.length < 3) {
     alert("Less Number of Characters Provided");
   } else {
     $(this).attr("disabled", true);
-    $.post(`${url}/updatecode`, obj)
+    $.post(`${url}api/updatecode`, obj)
       .done((data) => {
-        loaderData.push(data);
-        LoadLoaderData();
-        $("#addLoaderName").val("");
-        addCodeHTML.session.setValue("");
-        addCodeCSS.session.setValue("");
-        $("#addContributorName").val("");
-        $(".code-snippet-container").removeClass("active");
-        $(this).attr("disabled", false);
+        if (data === "Done") {
+          delete obj.password;
+          loaderData[editthis] = obj;
+          LoadLoaderData();
+          $("#addLoaderName").val("");
+          addCodeHTML.session.setValue("");
+          addCodeCSS.session.setValue("");
+          $("#addContributorName").val("");
+          $(".code-snippet-container").removeClass("active");
+          $(this).attr("disabled", false);
+        } else {
+          alert("Error!!! Wrong Password");
+          $(this).attr("disabled", false);
+        }
       })
       .catch((err) => {
         alert("Error!!! Cannot Add the Loader");
