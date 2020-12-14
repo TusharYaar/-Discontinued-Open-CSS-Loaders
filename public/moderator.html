@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator</title>
+    <style></style>
+    <style id="loaderStyle"></style> 
+    <link rel="stylesheet" href="./mainstyle.css">
+</head>
+<body>
+    <header>
+        <h1 id="brand-name"> Open CSS Loader</h1>
+        <hr>
+        <label for="password">Password <img id="showPassword" src="https://img.icons8.com/office/16/000000/show-password.png"/> </label>
+        <input type="password" id="password"> 
+    </header>
+    <section id="addCode" class="code-snippet-container">
+        <img src="https://img.icons8.com/pastel-glyph/64/000000/cancel--v1.png"  alt="X">
+            <div id="detailsToAddCode">
+                <div><label for="addLoaderName">Name of the loader</label>
+             <input id="addLoaderName" type="text">
+             <br>
+             <label for="addContributorName">Contributor</label>
+            <input id="addContributorName" type="text">
+            </div>
+            <div id="output"><h6>Output</h6><div id="addCodeOutput" class="loaderbox"></div></div>
+        </div>
+         <h6>HTML   (It Sholud Have only  "<span id="id-to-add"></span>" as its parent element id)</h6>
+         <div id="addCodeHTML"></div>
+    
+        <h6>CSS</h6>
+        <div id="addCodeCSS"></div>
+        <button class="btn" id="btnEditThisCode">Edit the Code</button>  
+    </section>
+    
+    Admin Page
+    
+
+<section class="container"><!-- The Container which loads all the Loaders --></section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://pagecdn.io/lib/ace/1.4.12/ace.min.js" crossorigin="anonymous" integrity="sha256-T5QdmsCQO5z8tBAXMrCZ4f3RX8wVdiA0Fu17FGnU1vU=" ></script>
+    <script>
+    ace.config.set('basePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+   ace.config.set('modePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+   ace.config.set('themePath', 'https://pagecdn.io/lib/ace/1.4.12/');
+   var addCodeHTML = ace.edit("addCodeHTML", { mode: "ace/mode/html", theme: "ace/theme/twilight", minLines: 10, maxLines: 42, fontSize: "16px", fontFamily: "monospace" });
+    var addCodeCSS = ace.edit("addCodeCSS", { mode: "ace/mode/css", theme: "ace/theme/twilight", minLines: 10, maxLines: 42, fontSize: "16px", fontFamily: "monospace" });
+    </script>
+    <script src="./moderator.js"></script>
+</body>
+
+</html>

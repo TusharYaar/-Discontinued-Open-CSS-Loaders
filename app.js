@@ -6,15 +6,16 @@ const express = require("express"),
 (bodyParser = require("body-parser")), (myRoutes = require("./routes")), (PORT = process.env.PORT || 3000);
 
 app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", myRoutes);
 
 app.get("/", (req, res) => {
-  res.send("index.html");
+  res.sendFile("./public/index.html", { root: __dirname });
 });
-
+app.get("/iamadmin", (req, res) => {
+  res.sendFile("./public/moderator.html", { root: __dirname });
+});
 app.get("/getquote", (req, res) => {
   var url = "https://api.adviceslip.com/advice";
   request(url, (err, result, body) => {
