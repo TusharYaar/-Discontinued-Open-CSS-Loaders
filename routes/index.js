@@ -61,15 +61,17 @@ router.put("/like/:loader", (req, res) => {
   });
 });
 
-router.post("/imgoingtodeletethispost/:loader", (req, res) => {
-  messages.findById(process.env.PASSWORD).then((data) => {
-    var password = req.body.password;
-    if (data.password === password) {
-      Db.deleteOne({ _id: req.params.loader }).then(function (data) {
-        res.send(data);
-      });
-    } else {
+router.post("/imgoingtodeletethispost", (req, res) => {
+  connection.query("Select * from others where mtype = 'PASSWORD'", (err, result) => {
+    if (req.body.password != result[0].content) {
       res.send("wrong password");
+    } else {
+      connection.query("DELETE from loaders WHERE loaderid = ?", req.body.loaderid, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        } else res.send("Done");
+      });
     }
   });
 });

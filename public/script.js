@@ -128,13 +128,14 @@ window.addEventListener("DOMContentLoaded", () => {
       contributor: $("#addContributorName").val(),
       loaderid: idtoadd,
     };
-    if (obj.name.length < 3 || obj.html.length < 6 || obj.css.length < 26) {
+    if (obj.lname.length < 3 || obj.html.length < 6 || obj.css.length < 26) {
       alert("Less Number of Characters Provided");
     } else if (ifIDPresent(obj) && checkKeyframes(obj.css)) {
       $(this).attr("disabled", true);
       $.post(`${url}api/addthiscode`, obj)
         .done((data) => {
-          loaderData.push(data);
+          obj.likes = 0;
+          loaderData.push(obj);
           LoadLoaderData();
           $("#addLoaderName").val("");
           addCodeHTML.session.setValue("");

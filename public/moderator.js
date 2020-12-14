@@ -79,7 +79,7 @@ $("#btnEditThisCode").click(function () {
   if (obj.lname.length < 3 || obj.html.length < 6 || obj.css.length < 26 || obj.password.length < 3) {
     alert("Less Number of Characters Provided");
   } else {
-    $(this).attr("disabled", true);
+    $(".btn").attr("disabled", true);
     $.post(`${url}api/updatecode`, obj)
       .done((data) => {
         if (data === "Done") {
@@ -91,17 +91,45 @@ $("#btnEditThisCode").click(function () {
           addCodeCSS.session.setValue("");
           $("#addContributorName").val("");
           $(".code-snippet-container").removeClass("active");
-          $(this).attr("disabled", false);
+          $(".btn").attr("disabled", false);
         } else {
           alert("Error!!! Wrong Password");
-          $(this).attr("disabled", false);
+          $(".btn").attr("disabled", false);
         }
       })
       .catch((err) => {
         alert("Error!!! Cannot Add the Loader");
-        $(this).attr("disabled", false);
+        $(".btn").attr("disabled", false);
       });
   }
+});
+
+$("#deleteThisCode").click(function (e) {
+  $(".btn").attr("disabled", true);
+  if (confirm("Are you sure you want to delete this")) {
+    if ($("#password").val().length < 5) alert("Password is too short");
+    else {
+      var obj = {
+        loaderid: editthisid,
+        password: $("#password").val(),
+      };
+      $.post(`${url}api/imgoingtodeletethispost`, obj)
+        .done((data) => {
+          if (data === "wrongPassword") alert("Wrong password");
+          else if (data === "Done") {
+            loaderData.splice(editthis, 1);
+            $(".code-snippet-container").removeClass("active");
+            LoadLoaderData();
+            alert("deleted Successfully");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("encountered Some error, See console for more details");
+        });
+    }
+  }
+  $(".btn").attr("disabled", false);
 });
 
 var delay = (function () {
