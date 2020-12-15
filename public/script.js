@@ -219,7 +219,7 @@ window.addEventListener("DOMContentLoaded", () => {
     var keyframeRE = new RegExp("@keyframes\\s\\w*", "gi");
     var arr = oldStyle.match(keyframeRE);
     existingKeyframes = [...arr];
-    console.log(existingKeyframes);
+    // console.log(existingKeyframes);
     showExistingKeyframes(existingKeyframes);
   }
   function showExistingKeyframes(arr) {
