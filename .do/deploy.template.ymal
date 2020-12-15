@@ -5,7 +5,7 @@ spec:
          git:
              branch: master
              repo_clone_url: https://github.com/TusharYaar/Open-CSS-Loaders
-             name: sample-nodejs
+             name: Open-CSS-Loaders
          env:
              - key: DATABASE_URL
                value: ${db.DATABASE_URL}
