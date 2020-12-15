@@ -75,6 +75,7 @@ a:active {
 #inpage-links {
   font-family: "Lato", sans-serif;
   font-size: 20px;
+  line-height: 2;
 }
 #inpage-links > a {
   margin: 10px;
