@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
       if (dark) {
         loaderbox.addClass("dark");
         loaderboxParent.addClass("dark");
-        console.log("dark class added");
+        // console.log("dark class added");
       }
       loaderboxParent.append(loaderbox);
       loaderboxParent.data("index", index);
@@ -49,6 +49,8 @@ window.addEventListener("DOMContentLoaded", () => {
       url: `${url}api/like/${id}`,
       data: `like=${data}`,
     }).done((data) => {
+      if (data.val == 1) $(this).children("img").removeClass("dark");
+      else if (data.val == -1 && dark) $(this).children("img").addClass("dark");
       var element = $(this).children("h6");
       element.text(parseInt(element.text()) + data.val);
       var img = data.val === 1 ? like[Math.floor(Math.random() * like.length)] : dislike;
@@ -186,36 +188,30 @@ window.addEventListener("DOMContentLoaded", () => {
     loaderData = data;
     LoadLoaderData();
   });
+  $("#go-to-top").click(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
 
   function ifIDPresent(obj) {
     var htmlre = new RegExp("loader" + idtoadd);
     var cssre = new RegExp("#loader" + idtoadd);
     var htmlren = new RegExp("loader[^" + idtoadd + "]");
     var cssren = new RegExp("#loader[^" + idtoadd + "]");
-    console.log(htmlre + " " + cssre + " " + cssren + " " + htmlren);
+    // console.log(htmlre + " " + cssre + " " + cssren + " " + htmlren);
     if (htmlre.test(obj.html) && !htmlren.test(obj.html) && cssre.test(obj.css) && !cssren.test(obj.css)) return true;
     else {
       alert("Wrong ID/s Provided");
       return false;
     }
   }
-  function alterHTML(myStr) {
-    let res = "";
-    for (var i = 0; i < myStr.length; i++) {
-      if (myStr[i] == "<") res += "&lt;";
-      else if (myStr[i] == ">") res += "&gt;";
-      else res += myStr[i];
-    }
-    return res;
-  }
   function changeid(str) {
     var num = loaderData[editthis].loaderid;
     var re = new RegExp("loader" + num, "g");
-    console.log(re);
+    // console.log(re);
     var newid = "editloader" + num;
-    console.log(newid);
+    // console.log(newid);
     str = str.replaceAll(re, newid);
-    console.log(str);
+    // console.log(str);
     return str;
   }
 
@@ -224,6 +220,13 @@ window.addEventListener("DOMContentLoaded", () => {
     var arr = oldStyle.match(keyframeRE);
     existingKeyframes = [...arr];
     console.log(existingKeyframes);
+    showExistingKeyframes(existingKeyframes);
+  }
+  function showExistingKeyframes(arr) {
+    $("#existingKeyframes ul").html("");
+    arr.forEach(function (a) {
+      $("#existingKeyframes ul").append(`<li>${a}</li>`);
+    });
   }
   function checkKeyframes(style) {
     var keyframeRE = new RegExp("@keyframes\\s\\w*", "gi");
