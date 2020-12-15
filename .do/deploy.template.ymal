@@ -1,0 +1,19 @@
+spec:
+      name: Open CSS Loaders
+      services:
+         - environment_slug: node-js
+         git:
+             branch: master
+             repo_clone_url: https://github.com/TusharYaar/Open-CSS-Loaders
+             name: sample-nodejs
+         env:
+             - key: DATABASE_URL
+               value: ${db.DATABASE_URL}
+             - key: DATABASE_PASSWORD
+               value: ${db.PASSWORD}
+             - key: DATABASE_USER
+               value: ${db.USERNAME}
+             - key: DATABASE_NAME
+               value: ${db.DATABASE}
+      databases:
+         - name: db
