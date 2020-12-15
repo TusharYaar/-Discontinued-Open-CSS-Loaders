@@ -15,7 +15,7 @@ The aim of the project is to provide a number of css loaders for your web page, 
 
 ## Instructions to Deploy to App Platform
 
-[![Deploy to DO](https://mp-assets1.sfo2.digitaloceanspaces.com/deploy-to-do/do-btn-blue-ghost.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/TusharYaar/Open-CSS-Loaders/tree/master)
+[![Deploy to DO](https://mp-assets1.sfo2.digitaloceanspaces.com/deploy-to-do/do-btn-blue-ghost.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/TusharYaar/Open-CSS-Loaders/tree/master&refcode=db49dfda85b6)
 
 You can use the Deploy to DigitalOcean button to deploy this repo directly to App Platform.
 
