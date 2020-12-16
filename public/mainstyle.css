@@ -135,6 +135,11 @@ p#quote.dark {
   transform: translateY(3px);
 }
 
+#page-theme-box {
+  display: flex;
+  justify-content: left;
+  margin-left: 20px;
+}
 #page-theme-toggle {
   width: 70px;
   height: 30px;
@@ -388,6 +393,10 @@ div.loaderbox.dark {
 .instruction.active {
   height: 300px;
   transition: height 0.4s;
+}
+
+#existingKeyframes.active {
+  overflow: scroll;
 }
 
 .instruction > img:not(#love-img) {
