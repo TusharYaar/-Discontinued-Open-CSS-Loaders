@@ -38,7 +38,9 @@ a:active {
   text-decoration: none;
   color: inherit;
 }
-
+#mobile-break {
+  display: none;
+}
 .social-media {
   display: inline-block;
   margin: 10px;
@@ -432,9 +434,24 @@ footer.dark {
   color: #eecaa6;
 }
 @media (max-width: 750px) {
-  .social-media {
-    margin: 5px;
+  h1 {
+    font-size: 50px;
   }
+  #mobile-break {
+    display: block;
+  }
+  .social-media:hover {
+    width: 130px;
+    background-color: rgba(128, 128, 128, 0.603);
+    transition: all 0.2s;
+  }
+  .social-media > span {
+    font-size: 20px;
+  }
+  .linkedin-div:hover {
+    width: 140px;
+  }
+
   #details-to-add-code {
     flex-direction: column;
   }

@@ -1,6 +1,6 @@
 // File For defining various variables
-// const url = "http://localhost:3000/";
-const url = "https://open-css-loaders-pwtuz.ondigitalocean.app/";
+const url = "http://localhost:3000/";
+// const url = "https://open-css-loaders-pwtuz.ondigitalocean.app/";
 const darkElement = ["header", "#page-theme-toggle > img", "body", ".social-media", ".loaderbox-parent", ".loaderbox", ".instruction", "footer", ".btn", "#theme-select", "#page-theme-toggle > img ", "div.loaderbox-parent > div.likes > h6", "section.code-snippet-container", "section.code-snippet-container > img", "div.loaderbox-parent > div.likes > img", "#page-theme-toggle", "#go-to-top", "p#quote"];
 const elements = ["addCodeHTML", "addCodeCSS", "showCodeHTML", "showCodeCSS", "editCodeHTML", "editCodeCSS"];
 var addCodeHTML = ace.edit("addCodeHTML", { mode: "ace/mode/html", theme: "ace/theme/twilight", minLines: 10, maxLines: 42, fontSize: "16px", fontFamily: "monospace" });

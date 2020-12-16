@@ -103,9 +103,12 @@ window.addEventListener("DOMContentLoaded", () => {
   $(".instruction").click(function () {
     $(this).toggleClass("active");
   });
-  $("#inpage-links > a").click(function () {
+  $("#inpage-links > a").click(function (e) {
     var id = $(this).attr("href");
-    $(id).toggleClass("active");
+    $("body,html").animate({ scrollTop: $(id).offset().top }, "slow", function () {
+      $(id).addClass("active");
+    });
+    e.preventDefault();
   });
 
   $("#btnEditCode").click(() => {
@@ -188,7 +191,8 @@ window.addEventListener("DOMContentLoaded", () => {
     loaderData = data;
     LoadLoaderData();
   });
-  $("#go-to-top").click(function () {
+  $("#go-to-top").click(function (e) {
+    e.preventDefault();
     $("html, body").animate({ scrollTop: 0 }, "slow");
   });
 
