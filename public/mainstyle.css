@@ -224,7 +224,7 @@ section.code-snippet-container {
   height: 0px;
   width: 100%;
   position: relative;
-  background-color: #9d95f2;
+  background-color: #9b5de5;
   top: 0px;
   font-size: 16px;
   padding: 10px;
@@ -336,7 +336,7 @@ div.loaderbox-parent > div.likes {
   right: 5px;
   width: 55px;
   height: 40px;
-  padding: 10px 0px 0px 10px;
+  padding-top: 10px;
 }
 div.loaderbox-parent > div.likes > img {
   height: 30px;

@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
     editthis = $(this).data("index");
     $(".code-snippet-container").removeClass("active");
     $("#showCode").addClass("active");
-    $("#showCode > h4").text(loaderData[editthis].name);
+    $("#showCode > h4").text(loaderData[editthis].lname);
     showCodeHTML.setValue(loaderData[editthis].html);
     showCodeCSS.setValue(loaderData[editthis].css);
   });
@@ -118,7 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
     $("#editCode").addClass("active");
     editCodeHTML.setValue(html);
     editCodeCSS.setValue(css);
-    $("#editCode > h4").text(loaderData[editthis].name);
+    $("#editCode > h4").text(loaderData[editthis].lname);
     $("#editCodeOutput").html(`<div>${html}</div>`);
     $("style#loaderStyle").text(oldStyle + css);
   });
