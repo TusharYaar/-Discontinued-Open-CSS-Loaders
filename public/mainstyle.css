@@ -135,10 +135,17 @@ p#quote.dark {
   transform: translateY(3px);
 }
 
-#page-theme-box {
+#page-theme-box,
+#ide-theme-box {
   display: flex;
   justify-content: left;
   margin-left: 20px;
+}
+#ide-theme-box {
+  margin: -10px 20px;
+}
+#ide-theme-box > h4 {
+  margin-top: 30px;
 }
 #page-theme-toggle {
   width: 70px;
@@ -397,7 +404,7 @@ div.loaderbox.dark {
 
 #existingKeyframes.active {
   overflow: scroll;
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .instruction > img:not(#love-img) {
@@ -476,7 +483,8 @@ footer.dark {
   .instruction.active {
     height: 500px;
   }
-  #about.active {
+  #about.active,
+  #existingKeyframes.active {
     height: 350px;
   }
 }
@@ -484,7 +492,8 @@ footer.dark {
   .instruction.active {
     height: 660px;
   }
-  #about.active {
+  #about.active,
+  #existingKeyframes.active {
     height: 450px;
   }
 }
