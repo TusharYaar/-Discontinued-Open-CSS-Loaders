@@ -397,6 +397,7 @@ div.loaderbox.dark {
 
 #existingKeyframes.active {
   overflow: scroll;
+  overflow-y: hidden;
 }
 
 .instruction > img:not(#love-img) {

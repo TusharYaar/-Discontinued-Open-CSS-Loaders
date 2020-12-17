@@ -35,6 +35,8 @@ You can use the Deploy to DigitalOcean button to deploy this repo directly to Ap
 | DATABASE_USER     | ${db.USERNAME}     |
 | DATABASE_NAME     | ${db.DATABASE}     |
 
+---
+
 ## Local Deployment
 
 First make sure you have node.js and Node Package Manager (npm) installed.
