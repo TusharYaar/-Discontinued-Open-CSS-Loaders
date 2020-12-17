@@ -474,11 +474,17 @@ footer.dark {
 }
 @media (max-width: 540px) {
   .instruction.active {
-    height: 450px;
+    height: 500px;
+  }
+  #about.active {
+    height: 350px;
   }
 }
 @media (max-width: 450px) {
   .instruction.active {
-    height: 550px;
+    height: 660px;
+  }
+  #about.active {
+    height: 450px;
   }
 }
