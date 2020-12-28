@@ -2,6 +2,8 @@
 
 ## About
 
+Check the app here: [https://open-css-loaders-pwtuz.ondigitalocean.app/](https://open-css-loaders-pwtuz.ondigitalocean.app/)
+
 This is the application deployed on Digital Ocean's app platform.
 The Structure of the application is:
 
