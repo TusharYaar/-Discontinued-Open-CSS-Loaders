@@ -39,6 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
     $("#showCode > h4").text(loaderData[editthis].lname);
     showCodeHTML.setValue(loaderData[editthis].html);
     showCodeCSS.setValue(loaderData[editthis].css);
+    $("html, body").animate({ scrollTop: { scrollTop: $("#showCode").offset().top } }, "slow");
   });
   $(".container").on("click", "div.likes", function (e) {
     e.stopPropagation();
@@ -121,6 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
     $("#editCode > h4").text(loaderData[editthis].lname);
     $("#editCodeOutput").html(`<div>${html}</div>`);
     $("style#loaderStyle").text(oldStyle + css);
+    $("body,html").animate({ scrollTop: $("#editCode").offset().top }, "slow");
   });
 
   // Add Code Button
