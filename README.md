@@ -1,4 +1,4 @@
-# Open CSS Loaders
+# Open CSS Loaders (DISCONTINUED)
 
 ## About
 
