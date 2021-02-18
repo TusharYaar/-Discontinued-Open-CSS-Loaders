@@ -1,8 +1,13 @@
 # Open CSS Loaders (DISCONTINUED)
+## DISCONTINUED
+This digital Ocean Deployment has been discontinued, and has been moved to Deta.sh. It now has been hosted on [https://chzaqr.deta.dev/](https://chzaqr.deta.dev/
+). Though you can still use the `Deploy to Digital Ocean` button.
 
 ## About
 
-Check the app here: [https://open-css-loaders-pwtuz.ondigitalocean.app/](https://open-css-loaders-pwtuz.ondigitalocean.app/)
+Check the app here: ~~https://open-css-loaders-pwtuz.ondigitalocean.app/~~ 
+Check Here: [https://chzaqr.deta.dev/](https://chzaqr.deta.dev/)
+
 
 This is the application deployed on Digital Ocean's app platform.
 The Structure of the application is:
